@@ -47,17 +47,17 @@ plt.figure()
 
 
 inds=np.isnan(data[:,2])==False
-p_braun=np.polyfit(surf[inds], data[inds,2], 2)
+p_ncit4=np.polyfit(surf[inds], data[inds,2], 2)
 # actually two b2ns - one below 36.2C surface and one above 36.0C
-p_braun1=np.polyfit(surf[(surf<36.2)*inds], data[(surf<36.2)*inds,2], 2)
-p_braun2=np.polyfit(surf[(surf>=35.8)*inds], data[(surf>=35.8)*inds,2], 2)
-braun_b2n = lambda surf: np.polyval(p_braun1, surf) if surf<36.2 else np.polyval(p_braun2, surf)
-braun_out = [braun_b2n(e) for e in surf]
+p_ncit4_1=np.polyfit(surf[(surf<36.2)*inds], data[(surf<36.2)*inds,2], 2)
+p_ncit4_2=np.polyfit(surf[(surf>=35.8)*inds], data[(surf>=35.8)*inds,2], 2)
+ncit4_b2n = lambda surf: np.polyval(p_ncit4_1, surf) if surf<36.2 else np.polyval(p_ncit4_2, surf)
+ncit4_out = [ncit4_b2n(e) for e in surf]
 plt.clf()
 plt.plot(surf*1.8+32, data[:,2]*1.8+32, '.', markersize=markersize)
 plt.plot(surf*1.8+32, physio_correction(surf, 22)*1.8+32)
 plt.plot(surf*1.8+32, np.ones((len(surf),))*96.8, 'k--')
-plt.plot(surf*1.8+32, [e*1.8+32 for e in braun_out], 'r')
+plt.plot(surf*1.8+32, [e*1.8+32 for e in ncit4_out], 'r')
 plt.plot(surf*1.8+32, np.ones((len(surf),))*100.4, 'k--')
 plt.xlabel('Surface Temperature (F)')
 plt.ylabel('Body Temperature (F)')
@@ -72,9 +72,9 @@ plt.clf()
 plt.plot(surf*1.8+32, data[:,6]*1.8+32, '.', markersize=markersize)
 plt.plot(surf*1.8+32, physio_correction(surf, 22)*1.8+32)
 plt.plot(surf*1.8+32, np.ones((len(surf),))*96.8, 'k--')
-p_exergen=np.polyfit(surf, data[:,6], 3)
-exergen_out = np.polyval(p_exergen, surf)
-plt.plot(surf*1.8+32, np.polyval(p_exergen, surf)*1.8+32, 'r')
+p_ncit3=np.polyfit(surf, data[:,6], 3)
+ncit3_out = np.polyval(p_ncit3, surf)
+plt.plot(surf*1.8+32, np.polyval(p_ncit3, surf)*1.8+32, 'r')
 plt.plot(surf*1.8+32, np.ones((len(surf),))*100.4, 'k--')
 plt.xlabel('Surface Temperature (F)')
 plt.ylabel('Body Temperature (F)')
@@ -90,11 +90,11 @@ plt.clf()
 plt.plot(surf*1.8+32, data[:,3]*1.8+32, '.', markersize=markersize)
 plt.plot(surf*1.8+32, physio_correction(surf, 22)*1.8+32)
 plt.plot(surf*1.8+32, np.ones((len(surf),))*96.8, 'k--')
-p_extech2=np.polyfit(surf[(surf<36.5)*(surf>32)], data[(surf<36.5)*(surf>32),3], 1)
-p_extech3=np.polyfit(surf[(surf>=36.5)], data[(surf>=36.5),3], 1)
-extech_b2n = lambda surf: np.polyval(p_extech2, surf) if surf<36.5 else np.polyval(p_extech3, surf)
-extech_out = [extech_b2n(s) for s in surf]
-plt.plot(surf*1.8+32, [e*1.8+32 for e in extech_out], 'r')
+p_ncit2_2=np.polyfit(surf[(surf<36.5)*(surf>32)], data[(surf<36.5)*(surf>32),3], 1)
+p_ncit2_3=np.polyfit(surf[(surf>=36.5)], data[(surf>=36.5),3], 1)
+ncit2_b2n = lambda surf: np.polyval(p_ncit2_2, surf) if surf<36.5 else np.polyval(p_ncit2_3, surf)
+ncit2_out = [ncit2_b2n(s) for s in surf]
+plt.plot(surf*1.8+32, [e*1.8+32 for e in ncit2_out], 'r')
 plt.plot(surf*1.8+32, np.ones((len(surf),))*100.4, 'k--')
 plt.xlabel('Surface Temperature (F)')
 plt.ylabel('Body Temperature (F)')
@@ -109,11 +109,11 @@ plt.clf()
 plt.plot(surf*1.8+32, data[:,4]*1.8+32, '.', markersize=markersize)
 plt.plot(surf*1.8+32, physio_correction(surf, 22)*1.8+32)
 plt.plot(surf*1.8+32, np.ones((len(surf),))*96.8, 'k--')
-p_qing2=np.polyfit(surf[(surf<36.2)*(surf>32)], data[(surf<36.2)*(surf>32),4], 1)
-p_qing3=np.polyfit(surf[(surf>=36.2)], data[(surf>=36.2),4], 1)
-qing_b2n = lambda surf: np.polyval(p_qing2, surf) if surf<36.2 else np.polyval(p_qing3, surf)
-qing_out = [qing_b2n(e) for e in surf]
-plt.plot(surf*1.8+32, [e*1.8+32 for e in qing_out], 'r')
+p_ncit1_2=np.polyfit(surf[(surf<36.2)*(surf>32)], data[(surf<36.2)*(surf>32),4], 1)
+p_ncit1_3=np.polyfit(surf[(surf>=36.2)], data[(surf>=36.2),4], 1)
+ncit1_b2n = lambda surf: np.polyval(p_ncit1_2, surf) if surf<36.2 else np.polyval(p_ncit1_3, surf)
+ncit1_out = [ncit1_b2n(e) for e in surf]
+plt.plot(surf*1.8+32, [e*1.8+32 for e in ncit1_out], 'r')
 plt.plot(surf*1.8+32, np.ones((len(surf),))*100.4, 'k--')
 plt.xlabel('Surface Temperature (F)')
 plt.ylabel('Body Temperature (F)')
@@ -123,24 +123,24 @@ plt.legend(['NCIT #1 Body Mode Output','71.6F Surface-to-Core','96.8F to 100.4F 
 plt.savefig('b2n_ncit1.png', bbox_inches='tight',pad_inches = 0.1)
 
 # get normalization ranges - these are all in Celsius
-qing_out = np.array(qing_out)
-extech_out = np.array(extech_out)
-exergen_out = np.array(exergen_out)
-braun_out = np.array(braun_out)
+ncit1_out = np.array(ncit1_out)
+ncit2_out = np.array(ncit2_out)
+ncit3_out = np.array(ncit3_out)
+ncit4_out = np.array(ncit4_out)
 thresh=37.5
-f_ind_q=np.where(qing_out>=thresh)[0][0]
+f_ind_q=np.where(ncit1_out>=thresh)[0][0]
 # recordings below scale
-#h_ind_q=np.where(qing_out<=35)[0][-1]
-f_ind_ext=np.where(extech_out>=thresh)[0][0]
+#h_ind_q=np.where(ncit1_out<=35)[0][-1]
+f_ind_ext=np.where(ncit2_out>=thresh)[0][0]
 
-#h_ind_ext=np.where(extech_out<=35)[0][-1]
+#h_ind_ext=np.where(ncit2_out<=35)[0][-1]
 thresh=(100.1 - 32)/1.8
-f_ind_exg=np.where(exergen_out>=38)[0][0]
-#h_ind_exg=np.where(exergen_out<=35)[0][-1]
+f_ind_exg=np.where(ncit3_out>=38)[0][0]
+#h_ind_exg=np.where(ncit3_out<=35)[0][-1]
 
 thresh=37.5
-f_ind_bf=np.where(braun_out>=thresh)[0][0]
-h_ind_bf=np.where(braun_out<=35)[0][-1]
+f_ind_bf=np.where(ncit4_out>=thresh)[0][0]
+h_ind_bf=np.where(ncit4_out<=35)[0][-1]
 
 body_temps = physio_correction(surf, 22)*1.8+32
 print('Normalization range for NCIT 1: %.2f- %.2fF'%(body_temps[0], body_temps[f_ind_q-1]))
