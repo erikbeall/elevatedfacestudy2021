@@ -26,7 +26,7 @@ Various pngs used in medRXiv paper
 Contains height, weight, age, gender (1==male, 0==not male)
 
 - stolaf_full_dataset.npy
-full_dataset is shaped (28,4), for (subject,tent)
+full_dataset is shaped (28,4,13), for (subject,tent)
 Note: tents C and D were swapped for first 11 datasets 
 because C was the second-hottest tent for first 11, then it was the hottest tent
 so now in this .npy, in every subject the order goes from coldest tent to hottest tent
@@ -46,6 +46,7 @@ columns are:
 9 = Device #3 Body temperature
 10 = Device #4 Scan Body temperature
 11 = air temperature (not adjusted with background, just raw air) over last 100 seconds in tent
+12 = distance to target (mm) measured by TOF sensor in FI device
 
 - stolaf_filtered_curve_data.npy
 curves_X is shaped (28,4,600), for (subject,tent,seconds)
